@@ -1,0 +1,79 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
+apply plugin: 'application'
+
+mainClassName = "com.opswat.metadefender.core.clientexample.Example"
+
+run {
+    if ( project.hasProperty("appArgs") ) {
+        args Eval.me(appArgs)
+    }
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+dependencies {
+    compile 'com.fasterxml.jackson.core:jackson-core:2.7.5'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.5'
+
+    testCompile 'junit:junit:4.12'
+    testCompile "com.github.tomakehurst:wiremock:2.1.4-rc3"
+}
+
+jar {
+    baseName = 'metadefender-core-client'
+    version =  '4.0.0'
+    exclude('com/opswat/metadefender/core/clientexample/**')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14'
+}
+
+
+//create a single Jar with all dependencies
+task createJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Metadefender Core Client',
+                'Implementation-Version': jar.version
+    }
+    baseName = jar.baseName + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+    exclude('com/opswat/metadefender/core/clientexample/**')
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+    exclude('com/opswat/metadefender/core/clientexample/**')
+}
+
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+
+//signing {
+//    sign configurations.archives
+//}
+
+group = "com.opswat"
+archivesBaseName = jar.baseName
+version = jar.version
+
+
