@@ -67,54 +67,56 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
-
-signing {
-    sign configurations.archives
-}
-
 group = "com.opswat"
 archivesBaseName = jar.baseName
 version = jar.version
 
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
+if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
+    signing {
+        sign configurations.archives
+    }
 
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-            pom.project {
-                name 'Metadefender Core Client'
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description 'Java7 library to easily use the Metadefender Core API'
-                url 'https://github.com/OPSWAT/Metadefender-Core-Client'
+                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
 
-                scm {
-                    connection 'scm:git:https://github.com/OPSWAT/Metadefender-Core-Client'
-                    developerConnection 'scm:git:https://github.com/OPSWAT/Metadefender-Core-Client'
+                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+
+                pom.project {
+                    name 'Metadefender Core Client'
+                    packaging 'jar'
+                    // optionally artifactId can be defined here
+                    description 'Java7 library to easily use the Metadefender Core API'
                     url 'https://github.com/OPSWAT/Metadefender-Core-Client'
-                }
 
-                licenses {
-                    license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    scm {
+                        connection 'scm:git:https://github.com/OPSWAT/Metadefender-Core-Client'
+                        developerConnection 'scm:git:https://github.com/OPSWAT/Metadefender-Core-Client'
+                        url 'https://github.com/OPSWAT/Metadefender-Core-Client'
                     }
-                }
 
-                developers {
-                    developer {
-                        id 'kristof.dombi'
-                        name 'Kristof Dombi'
-                        email 'kristof.dombi@opswat.com'
+                    licenses {
+                        license {
+                            name 'The Apache License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'kristof.dombi'
+                            name 'Kristof Dombi'
+                            email 'kristof.dombi@opswat.com'
+                        }
                     }
                 }
             }
