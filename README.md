@@ -16,6 +16,25 @@ This library makes it easy to:
 * Get the version of the Metadefender Core
 
 
+## Usage with Maven
+
+Add this dependency to you project:
+
+**Gradle**
+```
+compile 'com.opswat:metadefender-core-client:4.0.0'
+```
+
+**Apache maven**
+```
+<dependency>
+    <groupId>com.opswat</groupId>
+    <artifactId>metadefender-core-client</artifactId>
+    <version>4.0.0</version>
+</dependency>
+```
+
+
 ## Live example
 
 ```
