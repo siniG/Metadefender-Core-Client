@@ -135,9 +135,9 @@ if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
 
                     developers {
                         developer {
-                            id 'kristof.dombi'
-                            name 'Kristof Dombi'
-                            email 'kristof.dombi@opswat.com'
+                            id 'OPSWAT'
+                            name 'OPSWAT, Inc.'
+                            email 'support@opswat.com'
                         }
                     }
                 }
