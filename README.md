@@ -1,13 +1,13 @@
 
 # Metadefender Core Client
-> Java library for the Metadefender V4 REST API.
+> Java library for the Metadefender Core v4 REST API.
 
 
 ## Features
 
 This library makes it easy to:
 * Connect to a Metadefender Core API point
-* Scan files for infections
+* Scan files for threats
 * Retrieve previous file scan results by file hash, or data_id
 * Login / Logout from the REST point
 * Fetching Available Scan Rules

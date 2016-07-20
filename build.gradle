@@ -117,7 +117,7 @@ if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
                     name 'Metadefender Core Client'
                     packaging 'jar'
                     // optionally artifactId can be defined here
-                    description 'Java7 library to easily use the Metadefender Core API'
+                    description 'Java library for the Metadefender Core v4 REST API.'
                     url 'https://github.com/OPSWAT/Metadefender-Core-Client'
 
                     scm {
@@ -128,8 +128,8 @@ if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
 
                     licenses {
                         license {
-                            name 'The Apache License, Version 2.0'
-                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            name 'The MIT License (MIT)'
+                            url 'https://opensource.org/licenses/MIT'
                         }
                     }
 
