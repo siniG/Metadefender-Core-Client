@@ -17,13 +17,18 @@ rm -rf ${ARTIFACT_ROOT}/*
 
 ${SOURCE_ROOT}/gradlew clean -p ${SOURCE_ROOT}
 ${SOURCE_ROOT}/gradlew build -p ${SOURCE_ROOT}
-${SOURCE_ROOT}/gradlew createJar -p ${SOURCE_ROOT}
+
+# uploading to nexus staging repo
+${SOURCE_ROOT}/gradlew uploadArchives -p ${SOURCE_ROOT} -PossrhUsername=${SSRH_USERNAME} -PossrhPassword=${SSRH_PASSWORD} -Psigning.keyId=${KEY_ID} -Psigning.password=${PASSWORD} -Psigning.secretKeyRingFile=${RING_FILE}
+
+# closing and releasing
+${SOURCE_ROOT}/gradlew closeAndPromoteRepository -p ${SOURCE_ROOT} -PossrhUsername=${SSRH_USERNAME} -PossrhPassword=${SSRH_PASSWORD} -Psigning.keyId=${KEY_ID} -Psigning.password=${PASSWORD} -Psigning.secretKeyRingFile=${RING_FILE}
+
 
 
 cp ${SOURCE_ROOT}/build/test-results/*.xml ${ARTIFACT_ROOT}/
 
 cp -r ${SOURCE_ROOT}/build/docs/ ${ARTIFACT_ROOT}/
-
 
 cp ${SOURCE_ROOT}/build/libs/* ${ARTIFACT_ROOT}/
 

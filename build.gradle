@@ -51,7 +51,7 @@ nexusStaging {
 
 jar {
     baseName = 'metadefender-core-client'
-    version =  '4.0.1'
+    version =  '4.0.2'
     exclude('com/opswat/metadefender/core/clientexample/**')
 }
 
